@@ -1,0 +1,73 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: resume_postgres
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgrespassword
+      POSTGRES_DB: resume_platform
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7-alpine
+    container_name: resume_redis
+    restart: always
+    ports:
+      - "6379:6379"
+
+  api:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: resume_api
+    restart: always
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/backend
+      - local_storage:/backend/local_storage
+    environment:
+      - DATABASE_URL=postgresql+asyncpg://postgres:postgrespassword@postgres:5432/resume_platform
+      - SYNC_DATABASE_URL=postgresql://postgres:postgrespassword@postgres:5432/resume_platform
+      - REDIS_URL=redis://redis:6379/0
+      - CELERY_BROKER_URL=redis://redis:6379/0
+      - CELERY_RESULT_BACKEND=redis://redis:6379/0
+      - SECRET_KEY=3kR5mR_y6Wk7W5P_l7B1D_g9B2v9f9r7a6S5D4f3g2h=
+      - ENCRYPTION_KEY=3kR5mR_y6Wk7W5P_l7B1D_g9B2v9f9r7a6S5D4f3g2h=
+      - BACKEND_CORS_ORIGINS=http://localhost:3000,https://resume-intelligence.vercel.app
+    depends_on:
+      - postgres
+      - redis
+
+  celery_worker:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: resume_celery_worker
+    restart: always
+    command: celery -A app.tasks.celery_app.celery_app worker --loglevel=info
+    volumes:
+      - ./backend:/backend
+      - local_storage:/backend/local_storage
+    environment:
+      - DATABASE_URL=postgresql+asyncpg://postgres:postgrespassword@postgres:5432/resume_platform
+      - SYNC_DATABASE_URL=postgresql://postgres:postgrespassword@postgres:5432/resume_platform
+      - REDIS_URL=redis://redis:6379/0
+      - CELERY_BROKER_URL=redis://redis:6379/0
+      - CELERY_RESULT_BACKEND=redis://redis:6379/0
+      - SECRET_KEY=3kR5mR_y6Wk7W5P_l7B1D_g9B2v9f9r7a6S5D4f3g2h=
+      - ENCRYPTION_KEY=3kR5mR_y6Wk7W5P_l7B1D_g9B2v9f9r7a6S5D4f3g2h=
+    depends_on:
+      - postgres
+      - redis
+
+volumes:
+  postgres_data:
+  local_storage:

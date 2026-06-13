@@ -1,0 +1,112 @@
+\documentclass[letterpaper,10pt]{article}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fontspec}
+
+\pagestyle{empty}
+
+% Margins
+\addtolength{\oddsidemargin}{-0.6in}
+\addtolength{\evensidemargin}{-0.6in}
+\addtolength{\textwidth}{1.2in}
+\addtolength{\topmargin}{-.6in}
+\addtolength{\textheight}{1.2in}
+
+\urlstyle{same}
+
+% Section formatting
+\titleformat{\section}{
+  \vspace{4pt}\raggedright\large\bfseries
+}{}{0em}{}[\color{gray}\titlerule \vspace{-4pt}]
+
+\newcommand{\resumeItem}[1]{
+  \item\small{
+    {#1 \vspace{-2pt}}
+  }
+}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-1pt}\item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & #2 \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-6pt}
+}
+
+\begin{document}
+
+%----------HEADING----------
+\begin{center}
+    {\Huge \bfseries {{ full_name }}} \\ \vspace{5pt}
+    \small 
+    {% if phone %}{{ phone }} \quad$\bullet$\quad {% endif %}
+    \href{mailto:{{ email }}}{ {{ email }} } 
+    {% if website %} \quad$\bullet$\quad \href{ {{ website }} }{Website} {% endif %}
+    {% if github_url %} \quad$\bullet$\quad \href{ {{ github_url }} }{GitHub} {% endif %}
+    {% if linkedin_url %} \quad$\bullet$\quad \href{ {{ linkedin_url }} }{LinkedIn} {% endif %}
+\end{center}
+
+\vspace{5pt}
+
+%-----------SUMMARY-----------
+\section{Summary}
+\small{
+  {{ summary }}
+}
+
+%-----------EXPERIENCE-----------
+\section{Experience}
+  \begin{itemize}[leftmargin=0.15in, label={}]
+    {% for exp in experience %}
+      \resumeSubheading
+        { {{ exp.company }} }{ {{ exp.location or "" }} }
+        { {{ exp.position }} }{ {{ exp.start_date }} -- {{ exp.end_date or "Present" }} }
+        \begin{itemize}[leftmargin=0.15in, topsep=2pt, itemsep=2pt]
+          {% for bullet in exp.bullets %}
+            \resumeItem{ {{ bullet }} }
+          {% endfor %}
+        \end{itemize}
+        \vspace{4pt}
+    {% endfor %}
+  \end{itemize}
+
+%-----------PROJECTS-----------
+\section{Projects}
+  \begin{itemize}[leftmargin=0.15in, label={}]
+    {% for proj in projects %}
+      \item
+      \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+        \textbf{ {{ proj.name }} } {% if proj.github_url %}$|$ \href{ {{ proj.github_url }} }{\small Code} {% endif %} & {{ proj.start_date or "" }} \\
+      \end{tabular*}\vspace{-5pt}
+      \begin{itemize}[leftmargin=0.15in, topsep=2pt, itemsep=2pt]
+        {% for bullet in proj.bullets %}
+          \resumeItem{ {{ bullet }} }
+        {% endfor %}
+      \end{itemize}
+      \vspace{4pt}
+    {% endfor %}
+  \end{itemize}
+
+%-----------EDUCATION-----------
+\section{Education}
+  \begin{itemize}[leftmargin=0.15in, label={}]
+    {% for edu in education %}
+      \resumeSubheading
+        { {{ edu.institution }} }{ {{ edu.degree }} }
+        { {{ edu.field_of_study }} }{ {{ edu.start_date }} -- {{ edu.end_date or "Present" }} }
+    {% endfor %}
+  \end{itemize}
+
+%-----------SKILLS-----------
+\section{Skills}
+ \begin{itemize}[leftmargin=0.15in, label={}]
+    \small{\item{
+     {% for s in skills %}
+       \textbf{ {{ s.name }} } ({% if s.category %}{{ s.category }}{% else %}Skill{% endif %}){% if not loop.last %} \quad$\bullet$\quad {% endif %}
+     {% endfor %}
+    }}
+ \end{itemize}
+
+\end{document}
