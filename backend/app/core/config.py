@@ -71,28 +71,29 @@ class Settings(BaseSettings):
 
     @model_validator(mode="after")
     def resolve_database_urls(self) -> "Settings":
-        default_async = "postgresql+asyncpg://postgres:postgres@localhost:5432/resume_platform"
-        default_sync = "postgresql://postgres:postgres@localhost:5432/resume_platform"
+        # 1. Standardize schemes first
+        if self.DATABASE_URL:
+            if self.DATABASE_URL.startswith("postgresql://"):
+                self.DATABASE_URL = self.DATABASE_URL.replace("postgresql://", "postgresql+asyncpg://", 1)
+            elif self.DATABASE_URL.startswith("postgres://"):
+                self.DATABASE_URL = self.DATABASE_URL.replace("postgres://", "postgresql+asyncpg://", 1)
+                
+        if self.SYNC_DATABASE_URL:
+            if self.SYNC_DATABASE_URL.startswith("postgresql+asyncpg://"):
+                self.SYNC_DATABASE_URL = self.SYNC_DATABASE_URL.replace("postgresql+asyncpg://", "postgresql://", 1)
+            elif self.SYNC_DATABASE_URL.startswith("postgres://"):
+                self.SYNC_DATABASE_URL = self.SYNC_DATABASE_URL.replace("postgres://", "postgresql://", 1)
+
+        # 2. Check if either URL points to a local address
+        db_is_local = any(h in self.DATABASE_URL for h in ["localhost", "127.0.0.1", "[::1]", "::1"])
+        sync_is_local = any(h in self.SYNC_DATABASE_URL for h in ["localhost", "127.0.0.1", "[::1]", "::1"])
         
-        # 1. Standardize DATABASE_URL schema to postgresql+asyncpg
-        db_url = self.DATABASE_URL
-        if db_url:
-            if db_url.startswith("postgresql://"):
-                self.DATABASE_URL = db_url.replace("postgresql://", "postgresql+asyncpg://", 1)
-            elif db_url.startswith("postgres://"):
-                self.DATABASE_URL = db_url.replace("postgres://", "postgresql+asyncpg://", 1)
-        
-        # 2. Standardize SYNC_DATABASE_URL schema or derive it from DATABASE_URL
-        if self.DATABASE_URL != default_async and self.SYNC_DATABASE_URL == default_sync:
+        # 3. Synchronize cross-references if one is external but the other is local
+        if not db_is_local and sync_is_local:
             self.SYNC_DATABASE_URL = self.DATABASE_URL.replace("postgresql+asyncpg://", "postgresql://", 1)
-        else:
-            sync_url = self.SYNC_DATABASE_URL
-            if sync_url:
-                if sync_url.startswith("postgresql+asyncpg://"):
-                    self.SYNC_DATABASE_URL = sync_url.replace("postgresql+asyncpg://", "postgresql://", 1)
-                elif sync_url.startswith("postgres://"):
-                    self.SYNC_DATABASE_URL = sync_url.replace("postgres://", "postgresql://", 1)
-                    
+        elif not sync_is_local and db_is_local:
+            self.DATABASE_URL = self.SYNC_DATABASE_URL.replace("postgresql://", "postgresql+asyncpg://", 1)
+            
         return self
 
 settings = Settings()
