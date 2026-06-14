@@ -23,6 +23,9 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy backend files
 COPY . .
 
-# Expose port and start FastAPI server
+# Make start.sh executable
+RUN chmod +x start.sh
+
+# Expose port and start FastAPI server via start.sh
 EXPOSE 8000
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["./start.sh"]
