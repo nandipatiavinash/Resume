@@ -2,7 +2,7 @@ import re
 import json
 import httpx
 import redis
-from typing import Optional, Dict, Any, List
+from typing import Optional, Dict, Any, List, Tuple
 from app.core.config import settings
 from app.services.ai.base import AIProvider
 import logging
