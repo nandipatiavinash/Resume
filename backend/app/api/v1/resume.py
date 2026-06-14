@@ -4,13 +4,13 @@ from fastapi.responses import FileResponse
 from sqlalchemy.future import select
 from sqlalchemy.ext.asyncio import AsyncSession
 import os
-from backend.app.core.database import get_db
-from backend.app.api.deps import get_current_active_user, check_quota
-from backend.app.core.limiter import limiter
-from backend.app.models import User, ResumeGeneration, Template, JobDescription
-from backend.app.schemas.resume import ResumeGenerationResponse, ResumeGenerationRequest
-from backend.app.services.s3_service import s3_service
-from backend.app.tasks.celery_app import generate_resume_task
+from app.core.database import get_db
+from app.api.deps import get_current_active_user, check_quota
+from app.core.limiter import limiter
+from app.models import User, ResumeGeneration, Template, JobDescription
+from app.schemas.resume import ResumeGenerationResponse, ResumeGenerationRequest
+from app.services.s3_service import s3_service
+from app.tasks.celery_app import generate_resume_task
 
 router = APIRouter()
 

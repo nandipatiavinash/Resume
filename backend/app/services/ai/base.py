@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
-from backend.app.schemas.resume import JDAnalysis, ResumeContent
-from backend.app.schemas.profile import ProjectAnalysisResponse
+from app.schemas.resume import JDAnalysis, ResumeContent
+from app.schemas.profile import ProjectAnalysisResponse
 import uuid
 
 class AIProvider(ABC):

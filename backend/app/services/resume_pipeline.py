@@ -3,17 +3,17 @@ import uuid
 import logging
 from sqlalchemy.future import select
 from sqlalchemy.orm import selectinload
-from backend.app.core.database import SessionLocal
-from backend.app.models import (
+from app.core.database import SessionLocal
+from app.models import (
     User, Profile, AIProviderConfig, Template, ResumeGeneration, JobDescription, ATSReport, Project
 )
-from backend.app.services.ai.factory import ProviderFactory
-from backend.app.services.matcher import ProjectMatcher
-from backend.app.services.latex_renderer import LaTeXRenderer
-from backend.app.services.pdf_compiler import PDFCompiler
-from backend.app.services.s3_service import s3_service
-from backend.app.services.ats_scorer import ATSScorer
-from backend.app.schemas.resume import JDAnalysis, ResumeContent
+from app.services.ai.factory import ProviderFactory
+from app.services.matcher import ProjectMatcher
+from app.services.latex_renderer import LaTeXRenderer
+from app.services.pdf_compiler import PDFCompiler
+from app.services.s3_service import s3_service
+from app.services.ats_scorer import ATSScorer
+from app.schemas.resume import JDAnalysis, ResumeContent
 
 logger = logging.getLogger("resume_pipeline")
 
@@ -85,7 +85,7 @@ class ResumePipeline:
                     openai_key = os.getenv("OPENAI_API_KEY")
                     if openai_key:
                         logger.info("No active provider config in DB. Falling back to system OPENAI_API_KEY.")
-                        from backend.app.core.security import encrypt_api_key
+                        from app.core.security import encrypt_api_key
                         encrypted_key = encrypt_api_key(openai_key)
                         provider_config = AIProviderConfig(
                             provider_name="openai",

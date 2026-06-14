@@ -1,10 +1,10 @@
 import pytest
 import uuid
-from backend.app.services.ats_scorer import ATSScorer
-from backend.app.services.matcher import ProjectMatcher
-from backend.app.services.latex_renderer import LaTeXRenderer
-from backend.app.services.ai.factory import ProviderFactory
-from backend.app.schemas.resume import ResumeContent, JDAnalysis
+from app.services.ats_scorer import ATSScorer
+from app.services.matcher import ProjectMatcher
+from app.services.latex_renderer import LaTeXRenderer
+from app.services.ai.factory import ProviderFactory
+from app.schemas.resume import ResumeContent, JDAnalysis
 
 # --- ATS Scorer Tests ---
 

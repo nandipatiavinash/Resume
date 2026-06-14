@@ -3,14 +3,14 @@ from datetime import timedelta
 from fastapi import APIRouter, Depends, HTTPException, status, Request
 from sqlalchemy.future import select
 from sqlalchemy.ext.asyncio import AsyncSession
-from backend.app.core.config import settings
-from backend.app.core.database import get_db
-from backend.app.core.security import (
+from app.core.config import settings
+from app.core.database import get_db
+from app.core.security import (
     get_password_hash, verify_password, create_access_token, create_refresh_token, decode_token
 )
-from backend.app.core.limiter import limiter
-from backend.app.models import User, Subscription
-from backend.app.schemas import (
+from app.core.limiter import limiter
+from app.models import User, Subscription
+from app.schemas import (
     UserCreate, UserLogin, UserResponse, Token, RefreshTokenRequest, PasswordResetRequest, PasswordResetConfirm
 )
 import httpx

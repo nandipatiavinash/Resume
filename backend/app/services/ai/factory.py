@@ -1,11 +1,11 @@
 from typing import Optional
-from backend.app.services.ai.base import AIProvider
-from backend.app.services.ai.openai import OpenAIProvider
-from backend.app.services.ai.claude import ClaudeProvider
-from backend.app.services.ai.gemini import GeminiProvider
-from backend.app.services.ai.deepseek import DeepSeekProvider
-from backend.app.services.ai.openrouter import OpenRouterProvider
-from backend.app.core.security import decrypt_api_key
+from app.services.ai.base import AIProvider
+from app.services.ai.openai import OpenAIProvider
+from app.services.ai.claude import ClaudeProvider
+from app.services.ai.gemini import GeminiProvider
+from app.services.ai.deepseek import DeepSeekProvider
+from app.services.ai.openrouter import OpenRouterProvider
+from app.core.security import decrypt_api_key
 
 class ProviderFactory:
     @staticmethod

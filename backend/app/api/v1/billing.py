@@ -1,11 +1,11 @@
 from fastapi import APIRouter, Depends, HTTPException, status, Request, Header
 from sqlalchemy.future import select
 from sqlalchemy.ext.asyncio import AsyncSession
-from backend.app.core.database import get_db
-from backend.app.api.deps import get_current_active_user
-from backend.app.core.config import settings
-from backend.app.models import User, Subscription
-from backend.app.services.stripe_service import stripe_service
+from app.core.database import get_db
+from app.api.deps import get_current_active_user
+from app.core.config import settings
+from app.models import User, Subscription
+from app.services.stripe_service import stripe_service
 from pydantic import BaseModel
 from datetime import datetime
 import json

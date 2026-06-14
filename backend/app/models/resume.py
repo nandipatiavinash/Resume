@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy import String, Text, ForeignKey, Integer, JSON, Boolean
 import uuid
-from backend.app.core.database import TimeStampedBase
+from app.core.database import TimeStampedBase
 
 class JobDescription(TimeStampedBase):
     __tablename__ = "job_descriptions"

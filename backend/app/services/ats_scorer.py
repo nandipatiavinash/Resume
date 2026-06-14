@@ -1,6 +1,6 @@
 import re
 from typing import List, Dict, Any
-from backend.app.schemas.resume import ResumeContent, JDAnalysis
+from app.schemas.resume import ResumeContent, JDAnalysis
 
 # List of strong action verbs popular on professional resumes
 ACTION_VERBS = {

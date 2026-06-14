@@ -3,12 +3,12 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.future import select
 from sqlalchemy.orm import selectinload
 from sqlalchemy.ext.asyncio import AsyncSession
-from backend.app.core.database import get_db
-from backend.app.api.deps import get_current_active_user
-from backend.app.models import (
+from app.core.database import get_db
+from app.api.deps import get_current_active_user
+from app.models import (
     User, Profile, Education, Skill, Experience, Certification, Achievement
 )
-from backend.app.schemas.profile import (
+from app.schemas.profile import (
     ProfileResponse, ProfileUpdate, ProfileCreate,
     EducationCreate, EducationUpdate, EducationResponse,
     SkillCreate, SkillUpdate, SkillResponse,

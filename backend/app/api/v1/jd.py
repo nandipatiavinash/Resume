@@ -1,12 +1,12 @@
 from fastapi import APIRouter, Depends, HTTPException, status, Request
 from sqlalchemy.future import select
 from sqlalchemy.ext.asyncio import AsyncSession
-from backend.app.core.database import get_db
-from backend.app.api.deps import get_current_active_user
-from backend.app.core.limiter import limiter
-from backend.app.models import User, JobDescription, AIProviderConfig
-from backend.app.schemas.resume import JobDescriptionResponse, JobDescriptionCreate, JDAnalysis
-from backend.app.services.ai.factory import ProviderFactory
+from app.core.database import get_db
+from app.api.deps import get_current_active_user
+from app.core.limiter import limiter
+from app.models import User, JobDescription, AIProviderConfig
+from app.schemas.resume import JobDescriptionResponse, JobDescriptionCreate, JDAnalysis
+from app.services.ai.factory import ProviderFactory
 import logging
 
 logger = logging.getLogger("jd_routes")
@@ -38,7 +38,7 @@ async def analyze_job_description(
         import os
         openai_key = os.getenv("OPENAI_API_KEY")
         if openai_key:
-            from backend.app.core.security import encrypt_api_key
+            from app.core.security import encrypt_api_key
             encrypted_key = encrypt_api_key(openai_key)
             provider_config = AIProviderConfig(
                 provider_name="openai",

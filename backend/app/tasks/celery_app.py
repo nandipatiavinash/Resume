@@ -1,12 +1,12 @@
 import asyncio
 import uuid
 from celery import Celery
-from backend.app.core.config import settings
-from backend.app.services.resume_pipeline import ResumePipeline
-from backend.app.services.github_analyzer import github_analyzer
-from backend.app.services.ai.factory import ProviderFactory
-from backend.app.core.database import SessionLocal
-from backend.app.models import Project, ProjectAnalysis, AIProviderConfig
+from app.core.config import settings
+from app.services.resume_pipeline import ResumePipeline
+from app.services.github_analyzer import github_analyzer
+from app.services.ai.factory import ProviderFactory
+from app.core.database import SessionLocal
+from app.models import Project, ProjectAnalysis, AIProviderConfig
 from sqlalchemy.future import select
 import logging
 
@@ -83,7 +83,7 @@ def analyze_github_task(project_id_str: str, user_id_str: str) -> None:
                 import os
                 openai_key = os.getenv("OPENAI_API_KEY")
                 if openai_key:
-                    from backend.app.core.security import encrypt_api_key
+                    from app.core.security import encrypt_api_key
                     encrypted_key = encrypt_api_key(openai_key)
                     provider_config = AIProviderConfig(
                         provider_name="openai",

@@ -2,11 +2,11 @@ from fastapi import APIRouter, Depends, HTTPException, status, Request
 from sqlalchemy.future import select
 from sqlalchemy.orm import selectinload
 from sqlalchemy.ext.asyncio import AsyncSession
-from backend.app.core.database import get_db
-from backend.app.api.deps import get_current_active_user, check_quota
-from backend.app.core.limiter import limiter
-from backend.app.models import User, Profile, JobDescription, AIProviderConfig, ResumeGeneration
-from backend.app.services.ai.factory import ProviderFactory
+from app.core.database import get_db
+from app.api.deps import get_current_active_user, check_quota
+from app.core.limiter import limiter
+from app.models import User, Profile, JobDescription, AIProviderConfig, ResumeGeneration
+from app.services.ai.factory import ProviderFactory
 from pydantic import BaseModel
 import logging
 
@@ -64,7 +64,7 @@ async def generate_cover_letter(
         import os
         openai_key = os.getenv("OPENAI_API_KEY")
         if openai_key:
-            from backend.app.core.security import encrypt_api_key
+            from app.core.security import encrypt_api_key
             encrypted_key = encrypt_api_key(openai_key)
             provider_config = AIProviderConfig(
                 provider_name="openai",

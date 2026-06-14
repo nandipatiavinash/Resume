@@ -1,8 +1,8 @@
 import json
 from typing import Optional
 from openai import AsyncOpenAI
-from backend.app.services.ai.base import AIProvider
-from backend.app.schemas.resume import JDAnalysis, ResumeContent
+from app.services.ai.base import AIProvider
+from app.schemas.resume import JDAnalysis, ResumeContent
 import logging
 
 logger = logging.getLogger("openai_provider")

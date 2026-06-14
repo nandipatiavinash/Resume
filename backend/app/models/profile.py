@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy import String, Text, ForeignKey, Integer, Date, JSON
 import uuid
-from backend.app.core.database import TimeStampedBase
+from app.core.database import TimeStampedBase
 
 class Profile(TimeStampedBase):
     __tablename__ = "profiles"

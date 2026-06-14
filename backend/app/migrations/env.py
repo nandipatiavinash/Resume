@@ -16,11 +16,11 @@ if config.config_file_name is not None:
     fileConfig(config.config_file_name)
 
 # Import model Base for migrations
-from backend.app.models import Base
+from app.models import Base
 target_metadata = Base.metadata
 
 # Set database connection string from settings
-from backend.app.core.config import settings
+from app.core.config import settings
 config.set_main_option("sqlalchemy.url", settings.SYNC_DATABASE_URL)
 
 

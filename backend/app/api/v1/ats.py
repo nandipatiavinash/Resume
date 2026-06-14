@@ -2,10 +2,10 @@ import uuid
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.future import select
 from sqlalchemy.ext.asyncio import AsyncSession
-from backend.app.core.database import get_db
-from backend.app.api.deps import get_current_active_user, check_quota
-from backend.app.models import User, ATSReport
-from backend.app.schemas.resume import ATSReportResponse
+from app.core.database import get_db
+from app.api.deps import get_current_active_user, check_quota
+from app.models import User, ATSReport
+from app.schemas.resume import ATSReportResponse
 
 router = APIRouter()
 

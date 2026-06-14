@@ -4,9 +4,9 @@ from sqlalchemy.future import select
 from sqlalchemy import func
 from sqlalchemy.orm import selectinload
 from sqlalchemy.ext.asyncio import AsyncSession
-from backend.app.core.database import get_db
-from backend.app.api.deps import get_current_admin_user
-from backend.app.models import User, Subscription, ResumeGeneration, Profile, AIProviderConfig
+from app.core.database import get_db
+from app.api.deps import get_current_admin_user
+from app.models import User, Subscription, ResumeGeneration, Profile, AIProviderConfig
 from pydantic import BaseModel
 import logging
 

@@ -4,9 +4,9 @@ from fastapi.middleware.cors import CORSMiddleware
 import structlog
 from slowapi import _rate_limit_exceeded_handler
 from slowapi.errors import RateLimitExceeded
-from backend.app.core.config import settings
-from backend.app.core.limiter import limiter
-from backend.app.api.v1 import router as api_v1_router
+from app.core.config import settings
+from app.core.limiter import limiter
+from app.api.v1 import router as api_v1_router
 
 # Configure structured logging
 structlog.configure(

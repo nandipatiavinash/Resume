@@ -2,8 +2,8 @@ import json
 import re
 from typing import Optional
 import httpx
-from backend.app.services.ai.base import AIProvider
-from backend.app.schemas.resume import JDAnalysis, ResumeContent
+from app.services.ai.base import AIProvider
+from app.schemas.resume import JDAnalysis, ResumeContent
 import logging
 
 logger = logging.getLogger("openrouter_provider")

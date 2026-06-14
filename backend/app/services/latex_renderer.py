@@ -1,7 +1,7 @@
 import re
 from jinja2 import Environment, BaseLoader
 from typing import Any, Dict, List
-from backend.app.schemas.resume import ResumeContent
+from app.schemas.resume import ResumeContent
 
 class LaTeXRenderer:
     # Top-level placeholders required in our Jinja2 templates

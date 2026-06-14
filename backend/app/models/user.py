@@ -2,7 +2,7 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy import String, Boolean, DateTime, ForeignKey, Index
 from datetime import datetime
 import uuid
-from backend.app.core.database import TimeStampedBase
+from app.core.database import TimeStampedBase
 
 class User(TimeStampedBase):
     __tablename__ = "users"

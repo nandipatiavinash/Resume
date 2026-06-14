@@ -1,4 +1,4 @@
-from backend.app.schemas.auth import (
+from app.schemas.auth import (
     UserCreate,
     UserLogin,
     UserResponse,
@@ -10,7 +10,7 @@ from backend.app.schemas.auth import (
     AIProviderConfigCreate,
     AIProviderConfigResponse,
 )
-from backend.app.schemas.profile import (
+from app.schemas.profile import (
     EducationBase,
     EducationCreate,
     EducationUpdate,
@@ -41,7 +41,7 @@ from backend.app.schemas.profile import (
     ProfileUpdate,
     ProfileResponse,
 )
-from backend.app.schemas.resume import (
+from app.schemas.resume import (
     EducationContent,
     SkillContent,
     ExperienceContent,

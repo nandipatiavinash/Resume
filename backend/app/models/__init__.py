@@ -1,6 +1,6 @@
-from backend.app.core.database import Base, TimeStampedBase
-from backend.app.models.user import User, Subscription, AIProviderConfig
-from backend.app.models.profile import (
+from app.core.database import Base, TimeStampedBase
+from app.models.user import User, Subscription, AIProviderConfig
+from app.models.profile import (
     Profile,
     Education,
     Skill,
@@ -10,7 +10,7 @@ from backend.app.models.profile import (
     Project,
     ProjectAnalysis,
 )
-from backend.app.models.resume import JobDescription, Template, ResumeGeneration, ATSReport
+from app.models.resume import JobDescription, Template, ResumeGeneration, ATSReport
 
 __all__ = [
     "Base",

@@ -3,11 +3,11 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.future import select
 from sqlalchemy.orm import selectinload
 from sqlalchemy.ext.asyncio import AsyncSession
-from backend.app.core.database import get_db
-from backend.app.api.deps import get_current_active_user
-from backend.app.models import User, Profile, Project, ProjectAnalysis
-from backend.app.schemas.profile import ProjectResponse, ProjectCreate, ProjectUpdate, ProjectAnalysisResponse
-from backend.app.tasks.celery_app import analyze_github_task
+from app.core.database import get_db
+from app.api.deps import get_current_active_user
+from app.models import User, Profile, Project, ProjectAnalysis
+from app.schemas.profile import ProjectResponse, ProjectCreate, ProjectUpdate, ProjectAnalysisResponse
+from app.tasks.celery_app import analyze_github_task
 
 router = APIRouter()
 

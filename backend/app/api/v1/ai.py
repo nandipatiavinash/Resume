@@ -2,11 +2,11 @@ import uuid
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.future import select
 from sqlalchemy.ext.asyncio import AsyncSession
-from backend.app.core.database import get_db
-from backend.app.api.deps import get_current_active_user
-from backend.app.core.security import encrypt_api_key
-from backend.app.models import User, AIProviderConfig
-from backend.app.schemas.auth import AIProviderConfigResponse, AIProviderConfigCreate
+from app.core.database import get_db
+from app.api.deps import get_current_active_user
+from app.core.security import encrypt_api_key
+from app.models import User, AIProviderConfig
+from app.schemas.auth import AIProviderConfigResponse, AIProviderConfigCreate
 
 router = APIRouter()
 

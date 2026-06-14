@@ -6,10 +6,10 @@ import uuid
 from datetime import datetime, timedelta
 from sqlalchemy.future import select
 from sqlalchemy.ext.asyncio import AsyncSession
-from backend.app.core.config import settings
-from backend.app.core.database import get_db
-from backend.app.models import User, Subscription, ResumeGeneration, ATSReport
-from backend.app.schemas import TokenPayload
+from app.core.config import settings
+from app.core.database import get_db
+from app.models import User, Subscription, ResumeGeneration, ATSReport
+from app.schemas import TokenPayload
 
 oauth2_scheme = OAuth2PasswordBearer(
     tokenUrl=f"{settings.API_V1_STR}/auth/login"

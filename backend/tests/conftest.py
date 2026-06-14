@@ -1,7 +1,7 @@
 import pytest
 import uuid
 from typing import Dict, Any
-from backend.app.schemas.resume import ResumeContent, EducationContent, SkillContent, ExperienceContent, JDAnalysis, ProjectContent
+from app.schemas.resume import ResumeContent, EducationContent, SkillContent, ExperienceContent, JDAnalysis, ProjectContent
 
 @pytest.fixture
 def mock_profile() -> Dict[str, Any]:

@@ -4,7 +4,7 @@ from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 from sqlalchemy import func
 from datetime import datetime
 import uuid
-from backend.app.core.config import settings
+from app.core.config import settings
 
 # Create database engine
 engine = create_async_engine(

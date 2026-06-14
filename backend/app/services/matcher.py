@@ -1,7 +1,7 @@
 import re
 import math
 from typing import List, Dict, Tuple, Any
-from backend.app.schemas.resume import JDAnalysis
+from app.schemas.resume import JDAnalysis
 
 # List of simple English stop words to filter out
 STOP_WORDS = {
