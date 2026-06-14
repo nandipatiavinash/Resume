@@ -14,8 +14,8 @@
     "framer-motion": "^11.0.8",
     "lucide-react": "^0.359.0",
     "next": "15.0.3",
-    "react": "19.0.0-rc-66a305508c-20241107",
-    "react-dom": "19.0.0-rc-66a305508c-20241107",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
     "tailwind-merge": "^2.2.2",
     "zustand": "^4.5.2"
   },
