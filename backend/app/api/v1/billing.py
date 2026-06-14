@@ -10,6 +10,7 @@ from pydantic import BaseModel
 from datetime import datetime
 import json
 import logging
+import uuid
 
 router = APIRouter()
 logger = logging.getLogger("billing_routes")
