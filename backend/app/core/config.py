@@ -1,5 +1,5 @@
 import os
-from typing import List
+from typing import List, Any
 from pydantic import AnyHttpUrl, BeforeValidator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 from typing_extensions import Annotated
@@ -62,7 +62,7 @@ class Settings(BaseSettings):
 
     # CORS Whitelist
     BACKEND_CORS_ORIGINS: Annotated[
-        List[str], BeforeValidator(parse_cors_origins)
+        Any, BeforeValidator(parse_cors_origins)
     ] = ["http://localhost:3000"]
 
     # Rate Limiting Settings
