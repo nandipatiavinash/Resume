@@ -5,7 +5,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.core.database import get_db
 from app.api.deps import get_current_active_user, check_quota
 from app.core.limiter import limiter
-from app.models import User, Profile, JobDescription, AIProviderConfig, ResumeGeneration
+from app.models import User, Profile, JobDescription, AIProviderConfig, ResumeGeneration, Project
 from app.services.ai.factory import ProviderFactory
 from pydantic import BaseModel
 import logging
