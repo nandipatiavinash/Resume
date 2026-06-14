@@ -63,22 +63,27 @@ export default function ProjectsPage() {
   const handleGithubImport = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
-    if (!githubUrl.includes("github.com")) {
-      setError("Please input a valid GitHub repository URL.");
+    
+    // Clean and parse URL to verify it has both owner and repo
+    const cleanUrl = githubUrl.trim().replace(/\/$/, "");
+    const parts = cleanUrl.split("github.com/");
+    const ownerRepo = parts[1]?.split("/");
+    
+    if (!parts[1] || !ownerRepo || ownerRepo.length < 2 || !ownerRepo[0] || !ownerRepo[1]) {
+      setError("Please input a valid GitHub repository URL in the format: https://github.com/owner/repository");
       return;
     }
 
     try {
       // 1. Create a project record first
-      const ownerRepo = githubUrl.split("github.com/")[1]?.split("/");
-      const repoName = ownerRepo && ownerRepo[1] ? ownerRepo[1] : "Imported Repository";
+      const repoName = ownerRepo[1];
       
       const newProj = await fetchWithAuth("/projects", {
         method: "POST",
         body: JSON.stringify({
           name: repoName,
           description: "Imported via GitHub URL integration.",
-          github_url: githubUrl
+          github_url: cleanUrl
         })
       });
 

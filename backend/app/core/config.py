@@ -69,6 +69,9 @@ class Settings(BaseSettings):
     DEFAULT_RATE_LIMIT: str = "100/minute"
     AI_RATE_LIMIT: str = "10/minute"
 
+    # GitHub API Authentication Token
+    GITHUB_TOKEN: str = ""
+
     @model_validator(mode="after")
     def resolve_database_urls(self) -> "Settings":
         # 1. Standardize schemes first

@@ -101,10 +101,15 @@ def analyze_github_task(project_id_str: str, user_id_str: str) -> None:
             )
 
             # 3. Trigger GitHub Analysis
-            analysis_dict = await github_analyzer.analyze_repo(
-                repo_url=project.github_url,
-                ai_provider=ai_provider
-            )
+            try:
+                analysis_dict = await github_analyzer.analyze_repo(
+                    repo_url=project.github_url,
+                    ai_provider=ai_provider,
+                    github_token=settings.GITHUB_TOKEN if settings.GITHUB_TOKEN else None
+                )
+            except Exception as e:
+                logger.exception(f"Error during GitHub analysis for project {project_id_str}: {e}")
+                return
 
             # 4. Save analysis record
             analysis_stmt = select(ProjectAnalysis).where(ProjectAnalysis.project_id == project_id)
