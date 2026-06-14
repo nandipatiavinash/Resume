@@ -36,7 +36,7 @@ async def generate_cover_letter(
         selectinload(Profile.experiences),
         selectinload(Profile.certifications),
         selectinload(Profile.achievements),
-        selectinload(Profile.projects)
+        selectinload(Profile.projects).selectinload(Project.analysis)
     )
     prof_res = await db.execute(prof_stmt)
     profile = prof_res.scalar_one_or_none()

@@ -32,7 +32,7 @@ async def get_profile(
         selectinload(Profile.experiences),
         selectinload(Profile.certifications),
         selectinload(Profile.achievements),
-        selectinload(Profile.projects)
+        selectinload(Profile.projects).selectinload(Project.analysis)
     )
     result = await db.execute(stmt)
     profile = result.scalar_one_or_none()

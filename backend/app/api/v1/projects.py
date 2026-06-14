@@ -40,8 +40,10 @@ async def create_project(
     )
     db.add(project)
     await db.commit()
-    await db.refresh(project)
-    return project
+    
+    stmt = select(Project).where(Project.id == project.id).options(selectinload(Project.analysis))
+    res = await db.execute(stmt)
+    return res.scalar_one()
 
 @router.put("/{project_id}", response_model=ProjectResponse)
 async def update_project(
